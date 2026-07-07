@@ -254,13 +254,16 @@ body{
   box-shadow:0 0 10px rgba(207,178,94,.5);
 }
 .q-toast__msg small{display:block;font-weight:500;opacity:.72;font-size:.78rem;margin-top:1px}
-/* prova social: canto superior esquerdo, separada da dopamina (que fica embaixo) */
+/* prova social: canto inferior esquerdo, discreta (estilo Fomo/Provely) */
 .q-toast--tl{
-  left:20px;right:auto;top:24px;bottom:auto;
-  max-width:min(340px,calc(100vw - 40px));
+  left:20px;right:auto;bottom:22px;top:auto;
+  max-width:min(320px,calc(100vw - 40px));
+  padding:11px 15px;
   transform:translateX(-130%);
 }
 .q-toast--tl.is-show{transform:translateX(0)}
+.q-toast--tl .q-toast__avatar{flex:0 0 26px;width:26px;height:26px}
+.q-toast--tl .q-toast__msg{font-size:.82rem}
 
 /* ===== INTRO ===== */
 .q-intro{
@@ -538,9 +541,9 @@ body{
   }
   .q-toast.is-show{transform:translateY(0)}
   .q-toast--tl{
-    left:12px;right:12px;top:12px;bottom:auto;
+    left:12px;right:12px;top:auto;bottom:12px;
     max-width:none;
-    transform:translateY(-150%);
+    transform:translateY(150%);
   }
   .q-toast--tl.is-show{transform:translateY(0)}
 }
@@ -550,7 +553,7 @@ body{
   <header class="q-header">
     <div class="brand">
       <span class="brand__mark" aria-hidden="true">
-        <img src="assets/logoprimetal.png" alt="Primetal" />
+        <img src="assets/logo-symbol-gold.png" alt="Primetal" />
       </span>
       <span class="brand__name">
         <strong>PRIMETAL</strong>
@@ -764,6 +767,9 @@ body{
 
   // ---------- Toast de dopamina ----------
   function toast(msg){
+    // some a prova social pra nunca sobrepor a dopamina
+    const sc = document.getElementById("qSocial");
+    if (sc) sc.classList.remove("is-show");
     let el = ensureToast();
     el.className = "q-toast";
     el.innerHTML = '<span class="q-toast__ico">'+ICON_CHECK+'</span><span class="q-toast__msg"></span>';
@@ -773,6 +779,9 @@ body{
   // ---------- Toast de prova social (canto superior esquerdo, elemento próprio) ----------
   let socialHideTimer;
   function socialToast(){
+    // não mostra prova social enquanto a dopamina está visível
+    const dp = document.getElementById("qToast");
+    if (dp && dp.classList.contains("is-show")) return;
     const s = buildSocial();
     let el = document.getElementById("qSocial");
     if (!el){ el = document.createElement("div"); el.id = "qSocial"; document.body.appendChild(el); }
