@@ -506,10 +506,26 @@ body{
   *{animation:none !important;transition:opacity .2s ease !important}
 }
 @media (max-width:540px){
-  .q-shell{margin-top:26px}
-  .q-stage{padding:44px 0 60px;min-height:48vh}
-  .q-question{margin-bottom:36px}
-  .q-option{padding:19px 20px}
+  /* compacta o topo pra pergunta + respostas caberem sem rolar */
+  .q-header{padding:16px 16px 4px}
+  .brand__mark,.brand__mark svg,.brand__mark img{width:32px;height:32px;flex:0 0 32px}
+  .brand__name strong{font-size:1.02rem;letter-spacing:4px}
+  .brand__name span{font-size:.5rem;letter-spacing:3px;margin-top:3px}
+  .q-trust{margin-top:9px;gap:4px 12px}
+  .q-trust span{font-size:.66rem}
+  .q-trust svg{width:12px;height:12px}
+  .q-live{margin-top:8px;padding:6px 13px;font-size:.74rem}
+  .q-shell{margin-top:14px}
+  .q-meta{margin-top:10px;font-size:.74rem}
+  .q-stage{padding:20px 0 40px;min-height:auto;justify-content:flex-start}
+  .q-back{margin-bottom:14px}
+  .q-question{
+    margin-bottom:20px;
+    font-size:clamp(1.12rem,4.6vw,1.34rem);
+    line-height:1.32;
+  }
+  .q-options{gap:11px}
+  .q-option{padding:15px 16px;border-radius:13px;font-size:.94rem}
   .q-toast{
     left:14px;
     right:14px;
