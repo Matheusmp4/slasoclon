@@ -1,0 +1,953 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Descubra Seu Nível de Acesso | Primetal</title>
+  <meta name="description" content="Responda o teste rápido e descubra se o seu perfil está pronto para acessar o mercado de ouro dos leilões públicos." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+:root{
+  --navy:#050d28;
+  --navy-soft:#2a2f45;
+  --gold:#cfb25e;
+  --gold-dark:#a9863a;
+  --green:#0c7a35;
+  --green-dark:#08551f;
+  --cream:#f4f1e9;
+  --card:#ffffff;
+  --text:#1b2233;
+  --muted:#7c8091;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:"Poppins",Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(120% 80% at 50% -10%,rgba(207,178,94,.20) 0%,rgba(207,178,94,0) 55%),
+    radial-gradient(100% 60% at 50% 110%,rgba(12,122,53,.10) 0%,rgba(12,122,53,0) 55%),
+    linear-gradient(180deg,#fbf9f4 0%,var(--cream) 100%);
+  background-attachment:fixed;
+  display:flex;
+  flex-direction:column;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ===== HEADER / LOGO ===== */
+.q-header{
+  padding:30px 20px 6px;
+  text-align:center;
+}
+.brand{
+  display:inline-flex;
+  align-items:center;
+  gap:13px;
+}
+.brand__mark{width:38px;height:38px;flex:0 0 38px}
+.brand__mark svg,.brand__mark img{width:38px;height:38px;display:block;object-fit:contain}
+.brand__name{text-align:left;line-height:1}
+.brand__name strong{
+  display:block;
+  font-size:1.18rem;font-weight:700;letter-spacing:5px;
+  color:var(--navy);
+}
+.brand__name span{
+  display:block;
+  margin-top:5px;
+  font-size:.56rem;font-weight:600;letter-spacing:4px;
+  color:var(--gold-dark);
+  text-transform:uppercase;
+}
+
+/* ===== TRUST STRIP ===== */
+.q-trust{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:7px 18px;
+  margin-top:15px;
+}
+.q-trust span{
+  display:inline-flex;align-items:center;gap:6px;
+  color:var(--navy);font-size:.74rem;font-weight:600;letter-spacing:.2px;
+}
+.q-trust svg{width:14px;height:14px;color:var(--gold-dark)}
+.q-trust b{color:var(--green);font-weight:700}
+
+/* ===== LIVE COUNTER (pessoas em tempo real) ===== */
+.q-live{
+  display:inline-flex;align-items:center;gap:9px;
+  margin-top:14px;
+  padding:8px 17px;border-radius:999px;
+  background:rgba(12,122,53,.08);
+  border:1px solid rgba(12,122,53,.2);
+  color:var(--navy);font-size:.82rem;font-weight:600;
+}
+.q-live__dot{
+  flex:0 0 9px;width:9px;height:9px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 0 0 rgba(12,122,53,.55);
+  animation:livePulse 1.6s ease-out infinite;
+}
+@keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(12,122,53,.5)}70%,100%{box-shadow:0 0 0 9px rgba(12,122,53,0)}}
+.q-live b{color:var(--green);font-variant-numeric:tabular-nums;font-weight:800}
+
+/* ===== PROGRESS ===== */
+.q-shell{
+  width:min(660px,calc(100% - 44px));
+  margin:34px auto 0;
+  flex:1 0 auto;
+}
+.q-progress{
+  height:6px;
+  border-radius:999px;
+  background:rgba(169,134,58,.16);
+  overflow:hidden;
+}
+.q-progress__fill{
+  height:100%;
+  width:12%;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-dark));
+  box-shadow:0 0 10px rgba(207,178,94,.7),0 0 4px rgba(207,178,94,.9);
+  transition:width .5s cubic-bezier(.4,0,.2,1);
+}
+.q-meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:14px;
+  font-size:.8rem;
+  font-weight:600;
+  letter-spacing:.2px;
+}
+.q-meta__step{color:var(--gold-dark)}
+.q-meta__compat{color:var(--gold-dark)}
+.q-meta__compat b{
+  color:var(--gold-dark);
+  display:inline-block;
+  animation:compatPulse 1.1s ease-in-out infinite;
+}
+@keyframes compatPulse{
+  0%,100%{transform:scale(1);text-shadow:0 0 0 rgba(169,134,58,0)}
+  50%{transform:scale(1.18);text-shadow:0 0 12px rgba(207,178,94,.55)}
+}
+
+/* ===== STAGE ===== */
+.q-stage{
+  padding:64px 0 70px;
+  min-height:54vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.q-question{
+  margin:0 0 46px;
+  text-align:center;
+  font-size:clamp(1.32rem,2.7vw,1.8rem);
+  line-height:1.4;
+  font-weight:600;
+  letter-spacing:-.2px;
+  color:var(--navy);
+  max-width:34ch;
+  margin-inline:auto;
+}
+.q-options{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.q-option{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  width:100%;
+  text-align:left;
+  padding:22px 24px;
+  border-radius:16px;
+  border:1.5px solid #e9e4d6;
+  background:var(--card);
+  color:var(--navy);
+  font-family:inherit;
+  font-size:clamp(.98rem,1.7vw,1.08rem);
+  font-weight:600;
+  letter-spacing:.1px;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(5,13,40,.04);
+  transition:transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+}
+.q-option:hover{
+  transform:translateY(-2px);
+  border-color:var(--gold);
+  box-shadow:0 12px 26px rgba(207,178,94,.16);
+}
+.q-option:disabled{cursor:default}
+.q-option.is-picked{
+  border-color:var(--gold);
+  box-shadow:0 12px 26px rgba(12,122,53,.14),0 0 20px rgba(207,178,94,.35);
+}
+.q-option__ico{
+  flex:0 0 22px;width:22px;height:22px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold-dark);
+}
+.q-option__ico svg{width:20px;height:20px;display:block}
+.q-logo-ico{
+  width:22px;height:22px;display:block;
+  background:url(assets/logo-symbol-gold.png) center/contain no-repeat;
+}
+.q-option.is-picked .q-option__ico{color:var(--green)}
+
+/* ===== TOAST (notificação de dopamina, não-bloqueante) ===== */
+.q-toast{
+  position:fixed;
+  left:50%;
+  bottom:28px;
+  transform:translate(-50%,150%);
+  z-index:60;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  max-width:min(440px,calc(100% - 28px));
+  padding:14px 20px;
+  border-radius:15px;
+  background:linear-gradient(135deg,var(--navy) 0%,#0b1739 55%,#12224d 100%);
+  border:1.5px solid rgba(207,178,94,.55);
+  color:#fff;
+  box-shadow:0 20px 44px rgba(5,13,40,.32),0 0 26px rgba(207,178,94,.28),inset 0 1px 0 rgba(255,255,255,.06);
+  font-size:.92rem;font-weight:600;line-height:1.35;letter-spacing:.1px;
+  word-break:break-word;
+  overflow:hidden;
+  opacity:0;
+  transition:transform .5s cubic-bezier(.2,.9,.3,1), opacity .35s ease;
+}
+/* varredura de brilho dourado */
+.q-toast::before{
+  content:"";
+  position:absolute;
+  top:0;left:-60%;
+  width:55%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(207,178,94,.35),transparent);
+  transform:skewX(-18deg);
+  pointer-events:none;
+}
+.q-toast.is-show::before{animation:toastShine 1.5s ease .25s 1}
+@keyframes toastShine{0%{left:-60%}100%{left:130%}}
+.q-toast__msg{flex:1 1 auto;min-width:0}
+.q-toast__msg b{color:var(--gold)}
+.q-toast.is-show{transform:translate(-50%,0);opacity:1}
+.q-toast__ico{
+  flex:0 0 26px;width:26px;height:26px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+  background:linear-gradient(180deg,var(--gold),var(--gold-dark));
+  box-shadow:0 0 12px rgba(207,178,94,.6);
+}
+.q-toast__ico svg{width:15px;height:15px;color:var(--navy)}
+/* variante prova social (avatar) */
+.q-toast__avatar{
+  flex:0 0 30px;width:30px;height:30px;border-radius:50%;
+  object-fit:cover;border:2px solid var(--gold);
+  box-shadow:0 0 10px rgba(207,178,94,.5);
+}
+.q-toast__msg small{display:block;font-weight:500;opacity:.72;font-size:.78rem;margin-top:1px}
+/* prova social: canto superior esquerdo, separada da dopamina (que fica embaixo) */
+.q-toast--tl{
+  left:20px;right:auto;top:24px;bottom:auto;
+  max-width:min(340px,calc(100vw - 40px));
+  transform:translateX(-130%);
+}
+.q-toast--tl.is-show{transform:translateX(0)}
+
+/* ===== INTRO ===== */
+.q-intro{
+  text-align:center;
+  padding:48px 0 64px;
+  min-height:56vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+}
+.q-intro__tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 18px;border-radius:999px;
+  background:rgba(169,134,58,.12);
+  color:var(--gold-dark);
+  font-size:.76rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+}
+.q-intro__tag svg{width:14px;height:14px}
+.q-intro h1{
+  margin:0;max-width:20ch;
+  font-size:clamp(1.7rem,5vw,2.5rem);line-height:1.15;font-weight:800;
+  letter-spacing:-.5px;color:var(--navy);
+}
+.q-intro h1 span{color:var(--gold-dark)}
+.q-intro p{
+  margin:0 auto;max-width:44ch;
+  color:#454b5c;font-size:clamp(1rem,2.2vw,1.15rem);line-height:1.55;font-weight:400;
+}
+.q-intro__meta{
+  display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:center;
+  margin-top:4px;
+}
+.q-intro__meta span{
+  display:inline-flex;align-items:center;gap:7px;
+  color:var(--navy);font-size:.84rem;font-weight:600;
+}
+.q-intro__meta svg{width:16px;height:16px;color:var(--gold-dark)}
+.q-start{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  margin-top:8px;min-height:62px;padding:0 40px;
+  border:none;cursor:pointer;font-family:inherit;
+  border-radius:14px;
+  background:linear-gradient(180deg,var(--gold),var(--gold-dark));
+  color:var(--navy);text-transform:uppercase;
+  font-size:clamp(1rem,2.4vw,1.18rem);font-weight:800;letter-spacing:.5px;
+  box-shadow:0 16px 32px rgba(169,134,58,.32),0 0 22px rgba(207,178,94,.4);
+  position:relative;overflow:hidden;
+  animation:pulseGold 2.2s ease-in-out infinite;
+}
+.q-start::before{
+  content:"";position:absolute;top:0;left:-70%;width:55%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
+  transform:skewX(-18deg);animation:ctaShine 2.6s ease-in-out infinite;
+}
+.q-start:hover{filter:brightness(1.05);transform:translateY(-2px)}
+.q-start svg{width:20px;height:20px}
+@keyframes pulseGold{0%,100%{box-shadow:0 0 0 0 rgba(207,178,94,.45),0 16px 32px rgba(169,134,58,.32)}50%{box-shadow:0 0 0 14px rgba(207,178,94,0),0 16px 32px rgba(169,134,58,.32)}}
+
+/* ===== BACK ===== */
+.q-back{
+  display:inline-flex;align-items:center;gap:6px;
+  align-self:flex-start;
+  margin:0 0 22px;
+  background:none;border:none;cursor:pointer;font-family:inherit;
+  color:var(--muted);font-size:.82rem;font-weight:600;
+  padding:6px 4px;transition:color .16s ease;
+}
+.q-back:hover{color:var(--gold-dark)}
+.q-back svg{width:15px;height:15px}
+
+/* ===== COUNTDOWN / ESCASSEZ ===== */
+.q-countdown{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:12px 22px;border-radius:12px;
+  background:rgba(12,122,53,.08);
+  border:1px solid rgba(12,122,53,.22);
+  color:var(--green-dark);font-weight:700;font-size:.92rem;
+}
+.q-countdown b{
+  font-variant-numeric:tabular-nums;
+  color:#fff;background:linear-gradient(180deg,var(--green),var(--green-dark));
+  padding:4px 10px;border-radius:8px;letter-spacing:1px;
+  box-shadow:0 4px 12px rgba(12,122,53,.3);
+}
+.q-countdown svg{width:17px;height:17px}
+.q-spots{
+  color:var(--gold-dark);font-size:.86rem;font-weight:700;
+  display:inline-flex;align-items:center;gap:7px;
+}
+.q-spots svg{width:15px;height:15px}
+.q-spots b{color:var(--green)}
+
+/* ===== ANALYZE / RESULT ===== */
+.q-analyze,.q-result{
+  text-align:center;
+  padding:64px 0 70px;
+  min-height:56vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+}
+.q-spinner{
+  width:58px;height:58px;
+  border-radius:50%;
+  border:4px solid rgba(169,134,58,.2);
+  border-top-color:var(--gold);
+  animation:spin 1s linear infinite;
+}
+.q-analyze p{margin:0;color:var(--navy);font-size:clamp(1.1rem,2.4vw,1.4rem);font-weight:700}
+.q-analyze small{color:var(--muted);font-weight:500}
+/* card premium do resultado */
+.q-result__card{
+  width:min(500px,100%);
+  margin:0 auto;
+  padding:40px 32px 34px;
+  display:flex;flex-direction:column;align-items:center;gap:18px;
+  background:linear-gradient(180deg,#ffffff 0%,#fdfaf3 100%);
+  border:1px solid rgba(207,178,94,.42);
+  border-radius:24px;
+  box-shadow:0 30px 70px rgba(5,13,40,.14),0 1px 0 rgba(255,255,255,.7) inset;
+  position:relative;overflow:hidden;
+}
+.q-result__card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--gold-dark),var(--gold),var(--gold-dark));
+}
+.q-result__tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 18px;border-radius:999px;
+  background:rgba(12,122,53,.1);
+  color:var(--green);
+  font-size:.74rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+}
+.q-result__tag svg{width:14px;height:14px}
+.q-result__badge{
+  width:74px;height:74px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+  background:linear-gradient(180deg,var(--green),var(--green-dark));
+  color:#fff;
+  box-shadow:0 14px 30px rgba(12,122,53,.32),0 0 0 7px rgba(12,122,53,.08);
+  animation:pop .5s cubic-bezier(.2,1.4,.5,1) both;
+}
+.q-result__badge svg{width:36px;height:36px}
+.q-result h2{
+  margin:0;
+  font-size:clamp(1.35rem,3.4vw,1.95rem);
+  line-height:1.24;font-weight:800;color:var(--navy);
+  letter-spacing:-.4px;max-width:18ch;
+}
+.q-result h2 span{
+  background:linear-gradient(180deg,var(--gold),var(--gold-dark));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+/* medidor de compatibilidade */
+.q-meter{width:100%;max-width:330px}
+.q-meter__head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-size:.82rem;font-weight:600;color:var(--navy);margin-bottom:7px;
+}
+.q-meter__head b{color:var(--green);font-size:1.1rem;font-weight:800}
+.q-meter__track{height:9px;border-radius:999px;background:rgba(5,13,40,.08);overflow:hidden}
+.q-meter__fill{
+  height:100%;width:8%;border-radius:999px;
+  background:linear-gradient(90deg,var(--gold),var(--green));
+  box-shadow:0 0 10px rgba(12,122,53,.45);
+  transition:width 1.2s cubic-bezier(.4,0,.2,1);
+}
+.q-result__text{
+  margin:0 auto;max-width:40ch;
+  color:#454b5c;font-size:clamp(.95rem,2vw,1.05rem);
+  line-height:1.6;font-weight:400;
+}
+/* painel de urgência (agrupa contador + vagas) */
+.q-urgency{
+  width:100%;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  padding:15px;border-radius:16px;
+  background:rgba(12,122,53,.05);
+  border:1px solid rgba(12,122,53,.16);
+}
+.q-countdown{
+  display:inline-flex;align-items:center;gap:10px;
+  color:var(--green-dark);font-weight:700;font-size:.9rem;
+}
+.q-countdown b{
+  font-variant-numeric:tabular-nums;
+  color:#fff;background:linear-gradient(180deg,var(--green),var(--green-dark));
+  padding:4px 11px;border-radius:8px;letter-spacing:1px;
+  box-shadow:0 4px 12px rgba(12,122,53,.3);
+}
+.q-countdown svg{width:16px;height:16px}
+.q-spots{
+  color:var(--gold-dark);font-size:.82rem;font-weight:700;
+  display:inline-flex;align-items:center;gap:7px;
+}
+.q-spots svg{width:14px;height:14px}
+.q-spots b{color:var(--green)}
+.q-cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:100%;min-height:60px;padding:0 24px;
+  border-radius:14px;
+  background:linear-gradient(180deg,var(--green),var(--green-dark));
+  color:#fff;text-decoration:none;text-transform:uppercase;
+  font-size:clamp(.98rem,2.2vw,1.12rem);font-weight:800;letter-spacing:.5px;
+  box-shadow:0 16px 32px rgba(12,122,53,.28),0 0 22px rgba(207,178,94,.3);
+  animation:pulse 2.2s ease-in-out infinite;
+  position:relative;overflow:hidden;
+}
+.q-cta::before{
+  content:"";
+  position:absolute;
+  top:0;left:-70%;
+  width:55%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);
+  transform:skewX(-18deg);
+  animation:ctaShine 2.6s ease-in-out infinite;
+}
+@keyframes ctaShine{0%{left:-70%}55%,100%{left:140%}}
+.q-cta:hover{filter:brightness(1.06);transform:translateY(-2px)}
+.q-secure{
+  display:inline-flex;align-items:center;gap:7px;
+  color:var(--muted);font-size:.78rem;font-weight:500;
+}
+.q-secure svg{width:15px;height:15px;color:var(--gold-dark)}
+
+/* ===== FOOTER ===== */
+.q-footer{
+  margin-top:auto;
+  padding:30px 20px 34px;
+  text-align:center;
+  border-top:1px solid rgba(5,13,40,.06);
+}
+.q-footer p{
+  margin:0 auto 10px;max-width:640px;
+  color:var(--muted);font-size:.76rem;line-height:1.55;font-weight:400;
+}
+.q-footer a{color:var(--gold-dark);font-weight:600;text-decoration:none;font-size:.8rem}
+
+/* ===== ANIM ===== */
+.fade-in{animation:fadeIn .45s ease both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(12,122,53,.4),0 16px 32px rgba(12,122,53,.28)}50%{box-shadow:0 0 0 14px rgba(12,122,53,0),0 16px 32px rgba(12,122,53,.28)}}
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;transition:opacity .2s ease !important}
+}
+@media (max-width:540px){
+  .q-shell{margin-top:26px}
+  .q-stage{padding:44px 0 60px;min-height:48vh}
+  .q-question{margin-bottom:36px}
+  .q-option{padding:19px 20px}
+  .q-toast{
+    left:14px;
+    right:14px;
+    bottom:16px;
+    max-width:none;
+    transform:translateY(150%);
+    padding:13px 16px;
+    font-size:.86rem;
+    border-radius:13px;
+  }
+  .q-toast.is-show{transform:translateY(0)}
+  .q-toast--tl{
+    left:12px;right:12px;top:12px;bottom:auto;
+    max-width:none;
+    transform:translateY(-150%);
+  }
+  .q-toast--tl.is-show{transform:translateY(0)}
+}
+  </style>
+</head>
+<body>
+  <header class="q-header">
+    <div class="brand">
+      <span class="brand__mark" aria-hidden="true">
+        <img src="assets/logoprimetal.png" alt="Primetal" />
+      </span>
+      <span class="brand__name">
+        <strong>PRIMETAL</strong>
+        <span>Metais Nobres</span>
+      </span>
+    </div>
+
+    <div class="q-trust">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg> 100% gratuito</span>
+      <span><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 18.6 6.1 20.8l1.2-6.6L2.5 9l6.6-.9L12 2z"/></svg> <b>4,9</b>/5 de avaliação</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg> <b>+12 mil</b> pessoas</span>
+    </div>
+
+    <div class="q-live">
+      <span class="q-live__dot"></span>
+      <span><b id="liveCount">43</b>&nbsp;pessoas fazendo o teste agora</span>
+    </div>
+  </header>
+
+  <main class="q-shell">
+    <div class="q-topbar" id="topBar" hidden>
+      <div class="q-progress"><div class="q-progress__fill" id="progressFill"></div></div>
+      <div class="q-meta">
+        <span class="q-meta__step" id="stepLabel">Pergunta 1 de 8</span>
+        <span class="q-meta__compat">Compatibilidade: <b id="compatLabel">12%</b></span>
+      </div>
+    </div>
+
+    <section id="quizArea" aria-live="polite"></section>
+  </main>
+
+  <footer class="q-footer">
+    <p>A Primetal é independente e não possui vínculo com a Caixa Econômica Federal. Conteúdo educativo; resultados variam conforme a dedicação de cada pessoa.</p>
+    <a href="#">Política de Privacidade</a>
+  </footer>
+
+  <script>
+  // ==== LINK DA PÁGINA DE VENDAS (marca o perfil como aprovado) ====
+  const SALES_PAGE = "oferta.html?perfil=ideal#perfil-ideal";
+
+  const ICON_DIAMOND = '<span class="q-logo-ico"></span>';
+  const ICON_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>';
+  const ICON_ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  const ICON_BACK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>';
+  const ICON_CLOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
+  const ICON_BOLT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>';
+  const ICON_USERS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
+  const ICON_SHIELD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>';
+  const ICON_FIRE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s4 4 4 8a4 4 0 0 1-8 0c0-1 .5-2 .5-2S6 10 6 14a6 6 0 0 0 12 0c0-5-6-12-6-12z"/></svg>';
+
+  // ==== PROVA SOCIAL EM TEMPO REAL (nomes + cidades + ações) ====
+  const AVATARS = [
+    "assets/depoimento-1.jpg","assets/depoimento-2.jpg","assets/depoimento-3.jpg",
+    "assets/depoimento-4.jpg","assets/depoimento-5.jpeg","assets/depoimento-6.jpeg"
+  ];
+  const SOCIAL_PEOPLE = [
+    {n:"Ana C.",c:"São Paulo, SP"},   {n:"Carlos M.",c:"Rio de Janeiro, RJ"},
+    {n:"Marina S.",c:"Belo Horizonte, MG"}, {n:"Roberto L.",c:"Curitiba, PR"},
+    {n:"Juliana P.",c:"Salvador, BA"}, {n:"Fernando A.",c:"Porto Alegre, RS"},
+    {n:"Patrícia R.",c:"Fortaleza, CE"}, {n:"Marcos V.",c:"Recife, PE"},
+    {n:"Camila F.",c:"Brasília, DF"},  {n:"Lucas T.",c:"Goiânia, GO"},
+    {n:"Sandra M.",c:"Campinas, SP"},  {n:"Eduardo N.",c:"Manaus, AM"}
+  ];
+  const SOCIAL_ACTIONS = [
+    "está respondendo o teste agora",
+    "acabou de concluir o teste",
+    "descobriu que tem o perfil ideal",
+    "liberou o acesso agora mesmo",
+    "começou o teste há instantes"
+  ];
+  const SOCIAL_TIMES = ["agora mesmo","há poucos segundos","há 1 minuto","há 2 minutos","há 3 minutos"];
+  const SOCIAL_FIXED = [
+    {t:"+128 pessoas fizeram o teste hoje", s:"perfis compatíveis com o Método"},
+    {t:"+40 acessos liberados nas últimas 24h", s:"condição por tempo limitado"},
+    {t:"Método aprovado por quem já compra ouro", s:"avaliação 4,9 de 5"}
+  ];
+  let socialIdx = 0;
+  function buildSocial(){
+    // alterna entre notificação de pessoa (real time) e reforço fixo
+    if (socialIdx++ % 3 === 2){
+      const f = SOCIAL_FIXED[Math.floor(Math.random()*SOCIAL_FIXED.length)];
+      return { img: AVATARS[Math.floor(Math.random()*AVATARS.length)], t:f.t, s:f.s };
+    }
+    const p = SOCIAL_PEOPLE[Math.floor(Math.random()*SOCIAL_PEOPLE.length)];
+    const a = SOCIAL_ACTIONS[Math.floor(Math.random()*SOCIAL_ACTIONS.length)];
+    const tm = SOCIAL_TIMES[Math.floor(Math.random()*SOCIAL_TIMES.length)];
+    return {
+      img: AVATARS[Math.floor(Math.random()*AVATARS.length)],
+      t: '<b>'+p.n+'</b> — '+p.c,
+      s: a + ' · ' + tm
+    };
+  }
+
+  // ==== vibração (feedback tátil no celular) ====
+  function buzz(ms){ try{ if(navigator.vibrate) navigator.vibrate(ms); }catch(e){} }
+  // ==== Meta Pixel por etapa ====
+  function track(ev, params){ try{ if(window.fbq) fbq('trackCustom', ev, params||{}); }catch(e){} }
+
+  const QUIZ = [
+    {
+      q: "Você sabia que existe um mercado de ouro dentro dos leilões públicos que quase ninguém conhece?",
+      options: [
+        { t:"Sim, já ouvi falar", r:"Boa! Isso já te coloca à frente de quem nunca ouviu falar." },
+        { t:"Não, isso é novidade pra mim", r:"Você chegou na hora certa de descobrir." }
+      ]
+    },
+    {
+      q: "O que mais te impede de aproveitar oportunidades como essa hoje?",
+      options: [
+        { t:"Não sei por onde começar", r:"Tranquilo — é exatamente isso que o método resolve." },
+        { t:"Tenho medo de errar e perder dinheiro", r:"Medo bom: é ele que protege quem aprende do jeito certo." },
+        { t:"Acho que é complicado demais", r:"É mais simples do que parece. Você vai ver." },
+        { t:"Nunca tive um passo a passo claro", r:"Então esse é justamente o que faltava pra você." }
+      ]
+    },
+    {
+      q: "Se você pudesse enxergar essas oportunidades antes da maioria, isso mudaria sua forma de comprar ouro?",
+      options: [
+        { t:"Sim, com certeza", r:"É assim que os que compram melhor pensam." },
+        { t:"Talvez, se fosse simples", r:"Boa notícia: simples é o nosso padrão." }
+      ]
+    },
+    {
+      q: "Com um método simples e direto, você se sentiria pronto pra dar o primeiro lance com segurança?",
+      options: [
+        { t:"Sim, total", r:"Essa confiança já é o seu primeiro lance vencedor." },
+        { t:"Provavelmente sim", r:"Com o passo a passo certo, vira 'com certeza'." }
+      ]
+    },
+    {
+      q: "O que faria mais diferença pra você agora?",
+      options: [
+        { t:"Entender como esse mercado funciona", r:"A base de tudo. Você pensa como investidor." },
+        { t:"Saber avaliar uma peça em segundos", r:"A habilidade que mais economiza dinheiro." },
+        { t:"Evitar os erros que custam caro", r:"Inteligente. Quem evita erro, multiplica lucro." },
+        { t:"Tudo isso junto", r:"Resposta de quem quer resultado de verdade." }
+      ]
+    },
+    {
+      q: "Você concorda que quem sabe avaliar corretamente compra por muito menos do que quem ‘vai na confiança’?",
+      options: [
+        { t:"Com certeza", r:"Exato. Conhecimento é o maior desconto que existe." },
+        { t:"Sim, faz total sentido", r:"É por isso que avaliar bem muda o jogo." }
+      ]
+    },
+    {
+      q: "Faz mais sentido aprender com quem já vive esse mercado todos os dias — em vez de tentar sozinho e correr o risco?",
+      options: [
+        { t:"Sim, com certeza", r:"Atalho inteligente: aprender com quem já faz." },
+        { t:"Prefiro aprender com quem já faz", r:"Decisão de quem economiza tempo e dinheiro." }
+      ]
+    },
+    {
+      q: "Você está pronto pra ter acesso a esse olhar antes que mais gente descubra?",
+      options: [
+        { t:"Sim, estou pronto!", r:"É isso! Confirmando o seu perfil agora." },
+        { t:"Sim, quero começar agora", r:"Perfeito! Preparando o seu acesso." }
+      ]
+    }
+  ];
+
+  const total = QUIZ.length;
+  const STORE_KEY = "primetal_quiz_v1";
+  let current = 0;
+  let answers = [];        // índice escolhido em cada pergunta
+  let toastTimer, socialTimer, displayedCompat = 12;
+
+  const area = document.getElementById("quizArea");
+  const topBar = document.getElementById("topBar");
+  const fill = document.getElementById("progressFill");
+  const stepLabel = document.getElementById("stepLabel");
+  const compatLabel = document.getElementById("compatLabel");
+
+  // ---------- Persistência (retoma de onde parou) ----------
+  function save(){
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify({current, answers})); }catch(e){}
+  }
+  function load(){
+    try{
+      const d = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
+      if (d && Array.isArray(d.answers)){ current = d.current||0; answers = d.answers; return true; }
+    }catch(e){}
+    return false;
+  }
+  function clearSave(){ try{ localStorage.removeItem(STORE_KEY); }catch(e){} }
+
+  function compatFor(answered){
+    return Math.min(99, Math.round(12 + (answered / total) * 87));
+  }
+  // anima o número da compatibilidade contando até o alvo
+  function animateCompat(target){
+    const from = displayedCompat;
+    const start = performance.now(), dur = 650;
+    function step(now){
+      const p = Math.min(1, (now-start)/dur);
+      const ease = 1 - Math.pow(1-p, 3);
+      const val = Math.round(from + (target-from)*ease);
+      compatLabel.textContent = val + "%";
+      if (p < 1) requestAnimationFrame(step);
+      else displayedCompat = target;
+    }
+    requestAnimationFrame(step);
+  }
+  function setProgress(answered, animate){
+    fill.style.width = Math.max(12, Math.round((answered/total)*100)) + "%";
+    const target = compatFor(answered);
+    if (animate) animateCompat(target);
+    else { compatLabel.textContent = target + "%"; displayedCompat = target; }
+    stepLabel.textContent = "Pergunta " + Math.min(current+1, total) + " de " + total;
+  }
+
+  // ---------- Toast de dopamina ----------
+  function toast(msg){
+    let el = ensureToast();
+    el.className = "q-toast";
+    el.innerHTML = '<span class="q-toast__ico">'+ICON_CHECK+'</span><span class="q-toast__msg"></span>';
+    el.querySelector(".q-toast__msg").textContent = msg;
+    flashToast(el, 2400);
+  }
+  // ---------- Toast de prova social (canto superior esquerdo, elemento próprio) ----------
+  let socialHideTimer;
+  function socialToast(){
+    const s = buildSocial();
+    let el = document.getElementById("qSocial");
+    if (!el){ el = document.createElement("div"); el.id = "qSocial"; document.body.appendChild(el); }
+    el.className = "q-toast q-toast--social q-toast--tl";
+    el.innerHTML =
+      '<img class="q-toast__avatar" src="'+s.img+'" alt="" />' +
+      '<span class="q-toast__msg">'+s.t+'<small>'+s.s+'</small></span>';
+    el.classList.remove("is-show");
+    void el.offsetWidth;
+    el.classList.add("is-show");
+    clearTimeout(socialHideTimer);
+    socialHideTimer = setTimeout(() => el.classList.remove("is-show"), 3400);
+  }
+  function ensureToast(){
+    let el = document.getElementById("qToast");
+    if (!el){ el = document.createElement("div"); el.id = "qToast"; document.body.appendChild(el); }
+    return el;
+  }
+  function flashToast(el, ms){
+    el.classList.remove("is-show");
+    void el.offsetWidth;
+    el.classList.add("is-show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove("is-show"), ms);
+  }
+
+  // agenda prova social durante a leitura de cada pergunta
+  // (depois que o toast de dopamina da resposta anterior já sumiu)
+  function scheduleSocial(){
+    clearTimeout(socialTimer);
+    const delay = current === 0 ? 2400 : 3000;
+    socialTimer = setTimeout(socialToast, delay);
+  }
+
+  function renderQuestion(){
+    const item = QUIZ[current];
+    setProgress(current, false);
+    const backBtn = current > 0
+      ? '<button class="q-back" id="backBtn">'+ICON_BACK+' Voltar</button>'
+      : '';
+    area.className = "q-stage fade-in";
+    area.innerHTML =
+      backBtn +
+      '<h1 class="q-question">' + item.q + '</h1>' +
+      '<div class="q-options">' +
+      item.options.map((o,i) =>
+        '<button class="q-option" data-i="'+i+'"'+(answers[current]===i?' aria-pressed="true"':'')+'>' +
+        '<span class="q-option__ico">'+ICON_DIAMOND+'</span>' +
+        '<span>'+o.t+'</span></button>'
+      ).join("") +
+      '</div>';
+
+    area.querySelectorAll(".q-option").forEach(btn => {
+      btn.addEventListener("click", () => choose(parseInt(btn.dataset.i,10), btn));
+    });
+    const bb = document.getElementById("backBtn");
+    if (bb) bb.addEventListener("click", goBack);
+    // foco na primeira opção (acessibilidade / teclado)
+    const first = area.querySelector(".q-option");
+    if (first) first.focus({preventScroll:true});
+    scheduleSocial();
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  function goBack(){
+    if (current === 0) return;
+    buzz(10);
+    clearTimeout(socialTimer);
+    current--;
+    save();
+    renderQuestion();
+  }
+
+  function choose(i, btn){
+    const item = QUIZ[current];
+    answers[current] = i;
+    save();
+    buzz(18);
+    track("QuizAnswer", { step: current+1, total: total });
+    area.querySelectorAll(".q-option").forEach(b => b.disabled = true);
+    btn.classList.add("is-picked");
+    btn.querySelector(".q-option__ico").innerHTML = ICON_CHECK;
+
+    const answered = current + 1;
+    setProgress(answered, true);
+    toast(item.options[i].r);
+
+    setTimeout(() => {
+      if (current + 1 >= total){
+        analyze();
+      } else {
+        current++;
+        renderQuestion();
+      }
+    }, 480);
+  }
+
+  function analyze(){
+    clearTimeout(socialTimer);
+    track("QuizComplete");
+    fill.style.width = "100%";
+    animateCompat(98);
+    stepLabel.textContent = "Análise final";
+    area.className = "q-analyze fade-in";
+    area.innerHTML =
+      '<div class="q-spinner"></div>' +
+      '<p>Analisando suas respostas...</p>' +
+      '<small>Calculando seu nível de compatibilidade</small>';
+    window.scrollTo({top:0,behavior:"smooth"});
+    setTimeout(showResult, 2200);
+  }
+
+  // ---------- Texto personalizado pela resposta da pergunta 2 (a "dor") ----------
+  function personalText(){
+    const painMap = [
+      "Como você ainda não sabia por onde começar, o passo a passo do Método Primetal foi feito exatamente pra te dar a primeira direção com clareza.",
+      "Como o seu receio é errar e perder dinheiro, o método te mostra como avaliar antes de dar qualquer lance — o medo vira segurança.",
+      "Você achava que era complicado demais, mas pelas suas respostas ficou claro: com o passo a passo certo, isso fica simples pra você.",
+      "Como o que te faltava era um passo a passo claro, é justamente isso que o Método Primetal entrega — do zero até o seu primeiro lance."
+    ];
+    const pain = answers[1];
+    const base = (pain != null && painMap[pain]) ? painMap[pain] : "Pelas suas respostas, você tem exatamente o perfil de quem aproveita as melhores oportunidades de ouro nos leilões.";
+    return base + " Seu acesso está liberado — garanta agora antes que mais gente descubra.";
+  }
+
+  // ---------- Contagem regressiva (escassez) ----------
+  function startCountdown(){
+    const el = document.getElementById("cdTime");
+    if (!el) return;
+    let secs = 10*60; // 10 minutos
+    (function tick(){
+      const m = String(Math.floor(secs/60)).padStart(2,"0");
+      const s = String(secs%60).padStart(2,"0");
+      el.textContent = m+":"+s;
+      if (secs > 0){ secs--; setTimeout(tick, 1000); }
+    })();
+  }
+
+  function showResult(){
+    clearSave();
+    track("ResultView");
+    area.className = "q-result fade-in";
+    area.innerHTML =
+      '<div class="q-result__card">' +
+        '<span class="q-result__tag">'+ICON_CHECK+' Perfil aprovado</span>' +
+        '<span class="q-result__badge">'+ICON_CHECK+'</span>' +
+        '<h2>Seu perfil é <span>IDEAL</span> para o Método Primetal</h2>' +
+        '<div class="q-meter">' +
+          '<div class="q-meter__head"><span>Compatibilidade</span><b>98%</b></div>' +
+          '<div class="q-meter__track"><div class="q-meter__fill" id="meterFill"></div></div>' +
+        '</div>' +
+        '<p class="q-result__text">'+personalText()+'</p>' +
+        '<div class="q-urgency">' +
+          '<div class="q-countdown">'+ICON_CLOCK+' Acesso reservado por <b id="cdTime">10:00</b></div>' +
+          '<span class="q-spots">'+ICON_FIRE+' Restam <b>&nbsp;7&nbsp;</b> vagas com esta condição hoje</span>' +
+        '</div>' +
+        '<a class="q-cta" href="'+SALES_PAGE+'" id="ctaBtn">LIBERAR MEU ACESSO AGORA</a>' +
+        '<span class="q-secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> Acesso 100% seguro · Sem cadastro</span>' +
+      '</div>';
+    const cta = document.getElementById("ctaBtn");
+    if (cta) cta.addEventListener("click", () => { buzz(25); track("CtaClick"); });
+    // anima o medidor de compatibilidade até 98%
+    setTimeout(() => { const m=document.getElementById("meterFill"); if(m) m.style.width="98%"; }, 120);
+    startCountdown();
+    buzz([15,60,15]);
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  // ---------- Contador "ao vivo" (oscila levemente) ----------
+  function startLiveCounter(){
+    const el = document.getElementById("liveCount");
+    if (!el) return;
+    let n = 38 + Math.floor(Math.random()*18); // 38–55
+    el.textContent = n;
+    setInterval(() => {
+      n += Math.floor(Math.random()*7) - 3;     // passo -3..+3
+      if (n < 31) n = 31 + Math.floor(Math.random()*4);
+      if (n > 67) n = 67 - Math.floor(Math.random()*4);
+      el.textContent = n;
+    }, 2600 + Math.floor(Math.random()*1600));
+  }
+
+  // ---------- Início ----------
+  startLiveCounter();
+  // Começa direto na pergunta; se já respondeu antes, retoma de onde parou.
+  if (!(load() && answers.length > 0 && current < total)){
+    current = 0; answers = [];
+  }
+  topBar.hidden = false;
+  track("QuizStart");
+  renderQuestion();
+  </script>
+</body>
+</html>
